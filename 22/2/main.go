@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	readFile, err := os.Open("2/input")
+	readFile, err := os.Open("22/2/input")
 	if err != nil {
 		panic(err.Error())
 	}
