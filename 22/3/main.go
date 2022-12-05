@@ -61,7 +61,7 @@ func solve2(scanner *bufio.Scanner) int {
 	return total
 }
 
-func priority(b byte) int {
+func priority(b byte) int { // TODO: FIX THIS! scoreMap works, this does not.
 	val := b - 64
 	if val <= abcLen {
 		val = val + abcLen
