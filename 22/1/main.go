@@ -7,27 +7,29 @@ import (
 	"strconv"
 )
 
+var input = "22/1/input"
+
 func main() {
-	readFile, err := os.Open("22/1/input")
-	if err != nil {
-		panic(err.Error())
-	}
+	readFile, _ := os.Open(input)
+
 	fileScanner := bufio.NewScanner(readFile)
 	fileScanner.Split(bufio.ScanLines)
+	top, top3 := solve(fileScanner)
+	fmt.Printf("Solution 1: %d\n", top)
+	fmt.Printf("Solution 2: %d\n", top3)
+}
 
+func solve(scanner *bufio.Scanner) (top, top3 int) {
 	elves := []int{0}
 	var i int
-	for fileScanner.Scan() {
-		txt := fileScanner.Text()
+	for scanner.Scan() {
+		txt := scanner.Text()
 		if txt == "" {
 			i++
 			elves = append(elves, 0)
 			continue
 		}
-		n, err := strconv.Atoi(fileScanner.Text())
-		if err != nil {
-			panic("atoi")
-		}
+		n, _ := strconv.Atoi(scanner.Text())
 		elves[i] += n
 	}
 
@@ -44,8 +46,5 @@ func main() {
 			max3 = v
 		}
 	}
-	fmt.Println(max1)
-	fmt.Println(max2)
-	fmt.Println(max3)
-	fmt.Println(max1 + max2 + max3)
+	return max1, max1 + max2 + max3
 }

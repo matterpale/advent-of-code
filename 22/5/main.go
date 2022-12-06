@@ -16,14 +16,14 @@ func main() {
 
 	fileScanner1 := bufio.NewScanner(readFile1)
 	fileScanner1.Split(bufio.ScanLines)
-	fmt.Printf("Solution 1: %s\n", solve1(fileScanner1))
+	fmt.Printf("Solution 1: %s\n", solve(fileScanner1, false))
 
 	fileScanner2 := bufio.NewScanner(readFile2)
 	fileScanner2.Split(bufio.ScanLines)
-	fmt.Printf("Solution 2: %s\n", solve2(fileScanner2))
+	fmt.Printf("Solution 2: %s\n", solve(fileScanner2, true))
 }
 
-func solve1(scanner *bufio.Scanner) string {
+func solve(scanner *bufio.Scanner, modern bool) string {
 	crg := prep(scanner)
 	for scanner.Scan() {
 		txt := scanner.Text()
@@ -32,23 +32,7 @@ func solve1(scanner *bufio.Scanner) string {
 			load, _ := strconv.Atoi(split[1])
 			src, _ := strconv.Atoi(split[3])
 			dst, _ := strconv.Atoi(split[5])
-			lifted := lift1(&crg[src-1], load)
-			crg[dst-1] = append(crg[dst-1], lifted...)
-		}
-	}
-	return topWord(crg)
-}
-
-func solve2(scanner *bufio.Scanner) string {
-	crg := prep(scanner)
-	for scanner.Scan() {
-		txt := scanner.Text()
-		if txt != "" {
-			split := strings.Split(txt, " ")
-			load, _ := strconv.Atoi(split[1])
-			src, _ := strconv.Atoi(split[3])
-			dst, _ := strconv.Atoi(split[5])
-			lifted := lift2(&crg[src-1], load)
+			lifted := lift(&crg[src-1], load, modern)
 			crg[dst-1] = append(crg[dst-1], lifted...)
 		}
 	}
@@ -81,24 +65,12 @@ func prep(scanner *bufio.Scanner) (crg [][]byte) {
 	return
 }
 
-func topWord(c [][]byte) string {
-	var word []byte
-	for _, s := range c {
-		word = append(word, s[len(s)-1])
+func lift(slot *[]byte, load int, modern bool) []byte {
+	lifted := (*slot)[len(*slot)-load:]
+	*slot = (*slot)[:len(*slot)-load]
+	if !modern {
+		reverse(&lifted)
 	}
-	return string(word)
-}
-
-func lift1(slot *[]byte, load int) []byte {
-	lifted := (*slot)[len(*slot)-load:]
-	*slot = (*slot)[:len(*slot)-load]
-	reverse(&lifted)
-	return lifted
-}
-
-func lift2(slot *[]byte, load int) []byte {
-	lifted := (*slot)[len(*slot)-load:]
-	*slot = (*slot)[:len(*slot)-load]
 	return lifted
 }
 
@@ -106,4 +78,12 @@ func reverse(s *[]byte) {
 	for i, j := 0, len(*s)-1; i < j; i, j = i+1, j-1 {
 		(*s)[i], (*s)[j] = (*s)[j], (*s)[i]
 	}
+}
+
+func topWord(c [][]byte) string {
+	var word []byte
+	for _, s := range c {
+		word = append(word, s[len(s)-1])
+	}
+	return string(word)
 }

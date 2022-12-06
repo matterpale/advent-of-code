@@ -7,32 +7,44 @@ import (
 	"strings"
 )
 
-func main() {
-	readFile, err := os.Open("22/2/input")
-	if err != nil {
-		panic(err.Error())
-	}
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
+var input = "22/2/input"
 
-	scoreSlice := [3][3]int{
-		{4, 8, 3},
-		{1, 5, 9},
-		{7, 2, 6},
-	}
-	var totalScore1, totalScore2 int
-	for fileScanner.Scan() {
-		txt := fileScanner.Text()
+var scoreSlice = [3][3]int{
+	{4, 8, 3},
+	{1, 5, 9},
+	{7, 2, 6},
+}
+
+func main() {
+	readFile1, _ := os.Open(input)
+	readFile2, _ := os.Open(input)
+
+	fileScanner1 := bufio.NewScanner(readFile1)
+	fileScanner1.Split(bufio.ScanLines)
+	fmt.Printf("Solution 1: %d\n", solve(fileScanner1, false))
+
+	fileScanner2 := bufio.NewScanner(readFile2)
+	fileScanner2.Split(bufio.ScanLines)
+	fmt.Printf("Solution 2: %d\n", solve(fileScanner2, true))
+
+}
+
+func solve(scanner *bufio.Scanner, smartStrategy bool) int {
+	var totalScore int
+	for scanner.Scan() {
+		txt := scanner.Text()
 		if txt != "" {
 			st := strings.Split(txt, " ")
-			opp, me := score1(st[0], st[1])
-			totalScore1 += scoreSlice[opp][me]
-			opp, me = score2(st[0], st[1])
-			totalScore2 += scoreSlice[opp][me]
+			var opp, me int
+			if !smartStrategy {
+				opp, me = score1(st[0], st[1])
+			} else {
+				opp, me = score2(st[0], st[1])
+			}
+			totalScore += scoreSlice[opp][me]
 		}
 	}
-	fmt.Printf("Total score 1: %d\n", totalScore1)
-	fmt.Printf("Total score 2: %d", totalScore2)
+	return totalScore
 }
 
 func score1(opp, me string) (x, y int) {
