@@ -14,28 +14,21 @@ func main() {
 
 	fileScanner1 := bufio.NewScanner(readFile1)
 	fileScanner1.Split(bufio.ScanLines)
-	fmt.Printf("Solution 1: %d\n", solve1(fileScanner1))
+	fmt.Printf("Solution 1: %d\n", solve(fileScanner1, false))
 
 	fileScanner2 := bufio.NewScanner(readFile2)
 	fileScanner2.Split(bufio.ScanLines)
-	fmt.Printf("Solution 2: %d\n", solve2(fileScanner2))
+	fmt.Printf("Solution 2: %d\n", solve(fileScanner2, true))
 }
 
-func solve1(scanner *bufio.Scanner) int {
+func solve(scanner *bufio.Scanner, param bool) int {
 	var total int
 	for scanner.Scan() {
 		txt := scanner.Text()
 		if txt != "" {
-		}
-	}
-	return total
-}
-
-func solve2(scanner *bufio.Scanner) int {
-	var total int
-	for scanner.Scan() {
-		txt := scanner.Text()
-		if txt != "" {
+			if param {
+				total++
+			}
 		}
 	}
 	return total
