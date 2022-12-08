@@ -65,7 +65,7 @@ func solve2(scanner *bufio.Scanner) int { // TODO: 2615 instead of 2609???
 }
 
 func priority(b byte) int {
-	val := b - 64
+	val := b - []byte("A")[0] + 1
 	if val <= abcLen {
 		val = val + abcLen
 	} else {
