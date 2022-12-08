@@ -13,17 +13,17 @@ const (
 	input  = "22/3/input"
 )
 
+func inputScanner() *bufio.Scanner {
+	readFile, _ := os.Open(input)
+	info, _ := readFile.Stat()
+	scanner := bufio.NewScanner(readFile)
+	scanner.Buffer(make([]byte, 0, info.Size()), int(info.Size()))
+	return scanner
+}
+
 func main() {
-	readFile1, _ := os.Open(input)
-	readFile2, _ := os.Open(input)
-
-	fileScanner1 := bufio.NewScanner(readFile1)
-	fileScanner1.Split(bufio.ScanLines)
-	fmt.Printf("Solution 1: %d\n", solve1(fileScanner1))
-
-	fileScanner2 := bufio.NewScanner(readFile2)
-	fileScanner2.Split(bufio.ScanLines)
-	fmt.Printf("Solution 2: %d\n", solve2(fileScanner2))
+	fmt.Printf("Solution 1: %d\n", solve1(inputScanner()))
+	fmt.Printf("Solution 2: %d\n", solve2(inputScanner()))
 }
 
 func solve1(scanner *bufio.Scanner) int {
@@ -44,8 +44,8 @@ func solve1(scanner *bufio.Scanner) int {
 	return total
 }
 
-func solve2(scanner *bufio.Scanner) int { // TODO: 2615 instead of 2609???
-	var total, n int
+func solve2(scanner *bufio.Scanner) int {
+	var total int
 	var group [][]byte
 	for scanner.Scan() {
 		group = append(group, scanner.Bytes())
@@ -55,7 +55,6 @@ func solve2(scanner *bufio.Scanner) int { // TODO: 2615 instead of 2609???
 		for _, char := range group[0] {
 			if slices.Contains(group[1], char) && slices.Contains(group[2], char) {
 				total += priority(char)
-				n++
 				break
 			}
 		}
@@ -73,20 +72,3 @@ func priority(b byte) int {
 	}
 	return int(val)
 }
-
-/*
-func priority2(b byte) int {
-	return priorityMap[string(b)]
-}
-
-var priorityMap = map[string]int{
-	"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7,
-	"h": 8, "i": 9, "j": 10, "k": 11, "l": 12, "m": 13, "n": 14,
-	"o": 15, "p": 16, "q": 17, "r": 18, "s": 19, "t": 20, "u": 21,
-	"v": 22, "w": 23, "x": 24, "y": 25, "z": 26,
-	"A": 27, "B": 28, "C": 29, "D": 30, "E": 31, "F": 32, "G": 33,
-	"H": 34, "I": 35, "J": 36, "K": 37, "L": 38, "M": 39, "N": 40,
-	"O": 41, "P": 42, "Q": 43, "R": 44, "S": 45, "T": 46, "U": 47,
-	"V": 48, "W": 49, "X": 50, "Y": 51, "Z": 52,
-}
-*/

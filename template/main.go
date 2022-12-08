@@ -31,7 +31,8 @@ func solve(scanner *bufio.Scanner, second bool) int {
 
 func inputScanner() *bufio.Scanner {
 	readFile, _ := os.Open(input)
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
-	return fileScanner
+	info, _ := readFile.Stat()
+	scanner := bufio.NewScanner(readFile)
+	scanner.Buffer(make([]byte, 0, info.Size()), int(info.Size()))
+	return scanner
 }
