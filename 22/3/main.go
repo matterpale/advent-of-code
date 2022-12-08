@@ -8,9 +8,10 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-const abcLen = 26
-
-var input = "22/3/input"
+const (
+	abcLen = 26
+	input  = "22/3/input"
+)
 
 func main() {
 	readFile1, _ := os.Open(input)
@@ -45,23 +46,21 @@ func solve1(scanner *bufio.Scanner) int {
 
 func solve2(scanner *bufio.Scanner) int { // TODO: 2615 instead of 2609???
 	var total, n int
+	var group [][]byte
 	for scanner.Scan() {
-		bytes1 := scanner.Bytes()
-		scanner.Scan()
-		bytes2 := scanner.Bytes()
-		scanner.Scan()
-		bytes3 := scanner.Bytes()
-		if len(bytes1) != 0 {
-			for _, char := range bytes1 {
-				if slices.Contains(bytes2, char) && slices.Contains(bytes3, char) {
-					total += priority(char)
-					n++
-					break
-				}
+		group = append(group, scanner.Bytes())
+		if len(group) < 3 {
+			continue
+		}
+		for _, char := range group[0] {
+			if slices.Contains(group[1], char) && slices.Contains(group[2], char) {
+				total += priority(char)
+				n++
+				break
 			}
 		}
+		group = nil
 	}
-	fmt.Println(n)
 	return total
 }
 
