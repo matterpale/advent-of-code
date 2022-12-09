@@ -6,16 +6,11 @@ import (
 	"os"
 )
 
+const input = "15/1/input"
+
 func main() {
-	readFile, err := os.Open("15/1/input")
-	if err != nil {
-		panic(err.Error())
-	}
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
-	fileScanner.Scan()
-	fmt.Println(solve1(fileScanner.Text()))
-	fmt.Println(solve2(fileScanner.Text()))
+	fmt.Println(solve1(inputScanner().Text()))
+	fmt.Println(solve2(inputScanner().Text()))
 }
 
 func solve1(input string) int {
@@ -50,4 +45,12 @@ func solve2(input string) int {
 		}
 	}
 	return p
+}
+
+func inputScanner() *bufio.Scanner {
+	readFile, _ := os.Open(input)
+	info, _ := readFile.Stat()
+	scanner := bufio.NewScanner(readFile)
+	scanner.Buffer(make([]byte, 0, info.Size()), 0)
+	return scanner
 }

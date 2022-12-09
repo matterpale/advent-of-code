@@ -8,16 +8,19 @@ import (
 	"strings"
 )
 
-func main() {
-	readFile, err := os.Open("21/2/input")
-	if err != nil {
-		panic(err.Error())
-	}
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
+const input = "21/2/input"
 
-	// fmt.Println(solve1(fileScanner))
-	fmt.Println(solve2(fileScanner))
+func inputScanner() *bufio.Scanner {
+	readFile, _ := os.Open(input)
+	info, _ := readFile.Stat()
+	scanner := bufio.NewScanner(readFile)
+	scanner.Buffer(make([]byte, 0, info.Size()), 0)
+	return scanner
+}
+
+func main() {
+	fmt.Println(solve1(inputScanner()))
+	fmt.Println(solve2(inputScanner()))
 }
 
 func solve1(scanner *bufio.Scanner) int {
