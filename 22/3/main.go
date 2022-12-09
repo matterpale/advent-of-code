@@ -17,7 +17,7 @@ func inputScanner() *bufio.Scanner {
 	readFile, _ := os.Open(input)
 	info, _ := readFile.Stat()
 	scanner := bufio.NewScanner(readFile)
-	scanner.Buffer(make([]byte, 0, info.Size()), int(info.Size()))
+	scanner.Buffer(make([]byte, 0, info.Size()), 1)
 	return scanner
 }
 
