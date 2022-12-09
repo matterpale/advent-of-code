@@ -11,37 +11,18 @@ import (
 )
 
 const (
-	input         = "22/9/input"
-	longRopeKnots = 10
+	input = "22/9/input"
 )
 
 func main() {
 	fmt.Printf("Solution 1: %d\nSolution 2: %d",
-		solve(inputScanner(), false),
-		solve(inputScanner(), true))
+		solve(inputScanner(), 2),
+		solve(inputScanner(), 10))
 }
 
-func solve(scanner *bufio.Scanner, long bool) int {
+func solve(scanner *bufio.Scanner, knots uint8) int {
 	tailVisited := make(map[ropes.Position]bool)
-
-	if !long {
-		rope := ropes.NewRope()
-		for scanner.Scan() {
-			txt := scanner.Text()
-			if txt != "" {
-				split := strings.Split(txt, " ")
-				direction := split[0]
-				steps, _ := strconv.Atoi(split[1])
-				for i := 0; i < steps; i++ {
-					rope.MoveHead(ropes.Direction(direction))
-					tailVisited[rope.TailPosition()] = true
-				}
-			}
-		}
-		return len(tailVisited)
-	}
-
-	longRope := ropes.NewLongRope(longRopeKnots)
+	rope := ropes.NewRope(knots)
 	for scanner.Scan() {
 		txt := scanner.Text()
 		if txt != "" {
@@ -49,8 +30,8 @@ func solve(scanner *bufio.Scanner, long bool) int {
 			d := split[0]
 			steps, _ := strconv.Atoi(split[1])
 			for i := 0; i < steps; i++ {
-				longRope.MoveHead(ropes.Direction(d))
-				tailVisited[longRope.TailPosition()] = true
+				rope.MoveHead(ropes.Direction(d))
+				tailVisited[rope.TailPosition()] = true
 			}
 		}
 	}

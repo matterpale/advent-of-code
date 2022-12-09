@@ -9,55 +9,52 @@ const (
 	right Direction = "R"
 )
 
-type Position [2]int
-type Knot struct {
-	position Position
-}
+type Rope []*segment
 
-func (k *Knot) move(d Direction) {
-	switch d {
-	case left:
-		k.position[0]--
-	case right:
-		k.position[0]++
-	case up:
-		k.position[1]--
-	case down:
-		k.position[1]++
-	default:
-		panic("invalid direction")
+func NewRope(knots uint8) *Rope {
+	rope := make(Rope, knots-1)
+	rope[0] = &segment{&knot{}, &knot{}}
+	for i := 1; i < len(rope); i++ {
+		rope[i] = &segment{rope[i-1].tail, &knot{}}
 	}
+	return &rope
 }
 
-type Rope struct {
-	Head, Tail *Knot
-}
-
-func NewRope() *Rope {
-	return &Rope{&Knot{}, &Knot{}}
-}
-
-func (r *Rope) MoveHead(d Direction) {
-	r.Head.move(d)
+func (r Rope) MoveHead(d Direction) {
+	r[0].head.move(d)
 	r.motion()
 }
 
-func (r *Rope) motion() {
+func (r Rope) motion() {
+	for _, seg := range r {
+		seg.motion()
+	}
+}
+
+func (r Rope) TailPosition() Position {
+	return r[len(r)-1].tail.position
+}
+
+type segment struct {
+	head, tail *knot
+}
+
+func (r *segment) motion() {
 	r.tailCatchup(up)
 	r.tailCatchup(down)
 	r.tailCatchup(left)
 	r.tailCatchup(right)
 }
 
-func (r *Rope) tailCatchup(d Direction) {
+func (r *segment) tailCatchup(d Direction) {
 	side1, side2, x, y, sgn := parameterMagic(d)
-	if r.Head.position[x]-r.Tail.position[x] == sgn*2 {
-		r.Tail.move(d)
-		if r.Head.position[y]-r.Tail.position[y] >= 1 {
-			r.Tail.move(side1)
+	if r.head.position[x]-r.tail.position[x] == sgn*2 {
+		r.tail.move(d)
+		if r.head.position[y]-r.tail.position[y] >= 1 {
+			r.tail.move(side1)
 		}
-		if r.Head.position[y]-r.Tail.position[y] <= -1 {
-			r.Tail.move(side2)
+		if r.head.position[y]-r.tail.position[y] <= -1 {
+			r.tail.move(side2)
 		}
 	}
 }
@@ -71,43 +68,27 @@ func parameterMagic(d Direction) (side1, side2 Direction, x, y, sgn int) {
 		side1, side2, x, y = right, left, y, x
 		if d == up {
 			sgn = -1
-		} else if d != down {
-			panic("invalid direction")
 		}
 	}
 	return
 }
 
-func (r *Rope) TailPosition() Position {
-	return r.Tail.position
+type Position [2]int
+type knot struct {
+	position Position
 }
 
-type LongRope []*Rope
-
-func tieRope(k *Knot) *Rope {
-	return &Rope{k, &Knot{}}
-}
-
-func NewLongRope(knots uint8) *LongRope {
-	lr := make(LongRope, knots-1)
-	lr[0] = NewRope()
-	for i := 1; i < len(lr); i++ {
-		lr[i] = tieRope(lr[i-1].Tail)
-	}
-	return &lr
-}
-
-func (lr LongRope) MoveHead(d Direction) {
-	lr[0].Head.move(d)
-	lr.motion()
-}
-
-func (lr LongRope) TailPosition() Position {
-	return lr[len(lr)-1].Tail.position
-}
-
-func (lr LongRope) motion() {
-	for _, r := range lr {
-		r.motion()
+func (k *knot) move(d Direction) {
+	switch d {
+	case left:
+		k.position[0]--
+	case right:
+		k.position[0]++
+	case up:
+		k.position[1]--
+	case down:
+		k.position[1]++
+	default:
+		panic("invalid direction")
 	}
 }
