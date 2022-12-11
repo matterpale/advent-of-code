@@ -6,7 +6,7 @@ import (
 	"log"
 	"strconv"
 
-	"adventofcode/domain"
+	"github.com/matterpale/advent-of-code/domain"
 )
 
 const dir = "pkg/22/06/"

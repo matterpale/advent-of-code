@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 
-	"adventofcode/domain"
+	"github.com/matterpale/advent-of-code/domain"
 
 	"golang.org/x/exp/slices"
 )

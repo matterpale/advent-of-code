@@ -1,4 +1,4 @@
-module adventofcode
+module github.com/matterpale/advent-of-code
 
 go 1.19
 

@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"adventofcode/domain"
-	"adventofcode/pkg/22/09/ropes"
+	"github.com/matterpale/advent-of-code/domain"
+	"github.com/matterpale/advent-of-code/pkg/22/09/ropes"
 )
 
 const dir = "pkg/22/09/"

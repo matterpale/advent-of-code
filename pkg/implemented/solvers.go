@@ -1,18 +1,18 @@
 package implemented
 
 import (
-	"adventofcode/domain"
-	y22d1 "adventofcode/pkg/22/01"
-	y22d2 "adventofcode/pkg/22/02"
-	y22d3 "adventofcode/pkg/22/03"
-	y22d4 "adventofcode/pkg/22/04"
-	y22d5 "adventofcode/pkg/22/05"
-	y22d6 "adventofcode/pkg/22/06"
-	y22d7 "adventofcode/pkg/22/07"
-	y22d8 "adventofcode/pkg/22/08"
-	y22d9 "adventofcode/pkg/22/09"
-	y22d10 "adventofcode/pkg/22/10"
-	y22d11 "adventofcode/pkg/22/11"
+	"github.com/matterpale/advent-of-code/domain"
+	y22d1 "github.com/matterpale/advent-of-code/pkg/22/01"
+	y22d2 "github.com/matterpale/advent-of-code/pkg/22/02"
+	y22d3 "github.com/matterpale/advent-of-code/pkg/22/03"
+	y22d4 "github.com/matterpale/advent-of-code/pkg/22/04"
+	y22d5 "github.com/matterpale/advent-of-code/pkg/22/05"
+	y22d6 "github.com/matterpale/advent-of-code/pkg/22/06"
+	y22d7 "github.com/matterpale/advent-of-code/pkg/22/07"
+	y22d8 "github.com/matterpale/advent-of-code/pkg/22/08"
+	y22d9 "github.com/matterpale/advent-of-code/pkg/22/09"
+	y22d10 "github.com/matterpale/advent-of-code/pkg/22/10"
+	y22d11 "github.com/matterpale/advent-of-code/pkg/22/11"
 )
 
 type Solvers map[string]domain.Solver

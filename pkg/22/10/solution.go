@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"adventofcode/domain"
+	"github.com/matterpale/advent-of-code/domain"
 )
 
 const (

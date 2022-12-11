@@ -6,7 +6,7 @@ import (
 	"os"
 	"sort"
 
-	"adventofcode/pkg/implemented"
+	"github.com/matterpale/advent-of-code/pkg/implemented"
 )
 
 // TODO: perhaps make it a CLI?
