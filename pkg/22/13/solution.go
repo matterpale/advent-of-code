@@ -1,4 +1,4 @@
-package y00d00 // Package y00d00 TODO: Specify
+package y22d13
 
 import (
 	"bufio"
@@ -7,14 +7,13 @@ import (
 	"github.com/matterpale/advent-of-code/domain"
 )
 
-const dir = "pkg/year/day/" // TODO: Specify
+const dir = "pkg/22/13/"
 
 type Solver struct {
 	scanner func() *bufio.Scanner
 }
 
 func (s *Solver) Init() domain.Solver {
-	// TODO: Register at pkg/implemented
 	s.scanner = domain.InputScannerGen(dir)
 	return s
 }

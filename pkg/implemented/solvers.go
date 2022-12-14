@@ -13,6 +13,8 @@ import (
 	y22d9 "github.com/matterpale/advent-of-code/pkg/22/09"
 	y22d10 "github.com/matterpale/advent-of-code/pkg/22/10"
 	y22d11 "github.com/matterpale/advent-of-code/pkg/22/11"
+	y22d12 "github.com/matterpale/advent-of-code/pkg/22/12"
+	y22d13 "github.com/matterpale/advent-of-code/pkg/22/13"
 )
 
 type Solvers map[string]domain.Solver
@@ -32,5 +34,7 @@ func GetSolvers() Solvers {
 		"y22d09": (&y22d9.Solver{}).Init(),
 		"y22d10": (&y22d10.Solver{}).Init(),
 		"y22d11": (&y22d11.Solver{}).Init(),
+		"y22d12": (&y22d12.Solver{}).Init(),
+		"y22d13": (&y22d13.Solver{}).Init(),
 	}
 }
