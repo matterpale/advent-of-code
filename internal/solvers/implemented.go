@@ -1,8 +1,9 @@
-package implemented
+package solvers
 
 import (
 	"github.com/matterpale/advent-of-code/domain"
 	y15d01 "github.com/matterpale/advent-of-code/pkg/15/01"
+	y21d01 "github.com/matterpale/advent-of-code/pkg/21/01"
 	y21d02 "github.com/matterpale/advent-of-code/pkg/21/02"
 	y22d01 "github.com/matterpale/advent-of-code/pkg/22/01"
 	y22d02 "github.com/matterpale/advent-of-code/pkg/22/02"
@@ -19,12 +20,11 @@ import (
 	y22d13 "github.com/matterpale/advent-of-code/pkg/22/13"
 )
 
-type Solvers map[string]domain.Solver
-
-var AllSolvers = Solvers{
+var Implemented = map[string]domain.Solver{
 	// 2015
 	"y15d01": &y15d01.Solver{},
 	// 2021
+	"y21d01": &y21d01.Solver{},
 	"y21d02": &y21d02.Solver{},
 	// 2022
 	"y22d01": &y22d01.Solver{},
@@ -42,9 +42,9 @@ var AllSolvers = Solvers{
 	"y22d13": &y22d13.Solver{},
 }
 
-func InitAllSolvers() Solvers {
-	for _, solver := range AllSolvers {
+func InitAllSolvers() map[string]domain.Solver {
+	for _, solver := range Implemented {
 		solver.Init()
 	}
-	return AllSolvers
+	return Implemented
 }

@@ -7,7 +7,7 @@ import (
 	"sort"
 
 	"github.com/matterpale/advent-of-code/domain"
-	"github.com/matterpale/advent-of-code/internal/implemented"
+	"github.com/matterpale/advent-of-code/internal/solvers"
 )
 
 // TODO: perhaps make it a CLI?
@@ -17,7 +17,7 @@ func main() {
 	argCount := len(args) - 1
 	switch argCount {
 	case 0:
-		allSolutions(implemented.InitAllSolvers())
+		allSolutions(solvers.InitAllSolvers())
 		return
 	case 1:
 		log.Panicf("none or at least 2 args expected (year, day); got: %s", args[1])
@@ -39,24 +39,24 @@ func puzzleSolver(year, day string) domain.Solver {
 	if err != nil {
 		log.Panic(err.Error())
 	}
-	solver, ok := implemented.AllSolvers[puzzle]
+	solver, ok := solvers.Implemented[puzzle]
 	if !ok {
 		log.Panicf("unimplemented solver: %s", puzzle)
 	}
-	printPuzzleHead(puzzle)
+	printPuzzleHeader(puzzle)
 	return solver.Init()
 }
 
-func allSolutions(solvers implemented.Solvers) {
+func allSolutions(solvers map[string]domain.Solver) {
 	for _, puzzle := range sortedKeys(solvers) {
-		printPuzzleHead(puzzle)
+		printPuzzleHeader(puzzle)
 		solvers[puzzle].Solve1()
 		solvers[puzzle].Solve2()
 		fmt.Println()
 	}
 }
 
-func sortedKeys(s implemented.Solvers) []string {
+func sortedKeys(s map[string]domain.Solver) []string {
 	keys := make([]string, len(s))
 	i := 0
 	for k := range s {
@@ -67,6 +67,6 @@ func sortedKeys(s implemented.Solvers) []string {
 	return keys
 }
 
-func printPuzzleHead(puzzle string) {
+func printPuzzleHeader(puzzle string) {
 	fmt.Printf("\tPuzzle %s:\n", puzzle)
 }

@@ -22,3 +22,13 @@ func InputScannerGen(dir string) func() *bufio.Scanner {
 		return scanner
 	}
 }
+
+func RunFirstSolution(solution func()) {
+	fmt.Println("Solution 01:")
+	solution()
+}
+
+func RunSecondSolution(solution func()) {
+	fmt.Println("Solution 02:")
+	solution()
+}

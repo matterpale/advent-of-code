@@ -1,28 +1,42 @@
-package main
+package y21d01
 
 import (
 	"bufio"
 	"fmt"
-	"os"
 	"strconv"
+
+	"github.com/matterpale/advent-of-code/domain"
 )
 
-const input = "21/01/input"
+const dir = "pkg/21/01/"
 
-func inputScanner() *bufio.Scanner {
-	readFile, _ := os.Open(input)
-	info, _ := readFile.Stat()
-	scanner := bufio.NewScanner(readFile)
-	scanner.Buffer(make([]byte, 0, info.Size()), 0)
-	return scanner
+type Solver struct {
+	scanner func() *bufio.Scanner
 }
 
-func main() {
-	fmt.Println(solve1(inputScanner()))
-	fmt.Println(solve2(inputScanner()))
+func (s *Solver) Init() domain.Solver {
+	// TODO: Once solved, register at internal/implemented!
+	s.scanner = domain.InputScannerGen(dir)
+	return s
 }
 
-func solve1(scanner *bufio.Scanner) int {
+func (s *Solver) Solve(_ ...string) {
+	// TODO: Consider providing a more abstract solution.
+	fmt.Println("Puzzle not abstracted for a general solution.")
+}
+
+func (s *Solver) Solve1() {
+	domain.RunFirstSolution()
+	s.solve1()
+}
+
+func (s *Solver) Solve2() {
+	domain.RunSecondSolution()
+	s.solve2()
+}
+
+func (s *Solver) solve1() {
+	scanner := s.scanner()
 	var prev int
 	incs := -1
 	for scanner.Scan() {
@@ -39,10 +53,11 @@ func solve1(scanner *bufio.Scanner) int {
 		}
 		prev = n
 	}
-	return incs
+	fmt.Println(incs)
 }
 
-func solve2(scanner *bufio.Scanner) int {
+func (s *Solver) solve2() {
+	scanner := s.scanner()
 	win := [4]int{}
 	var i, j, incs int
 	for scanner.Scan() {
@@ -64,7 +79,7 @@ func solve2(scanner *bufio.Scanner) int {
 		i = (i + 1) % 4
 		j++
 	}
-	return incs
+	fmt.Println(incs)
 }
 
 func comp(win [4]int, i int) (int, int) {

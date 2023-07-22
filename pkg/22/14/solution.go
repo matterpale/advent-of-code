@@ -27,12 +27,12 @@ func (s *Solver) Solve(_ ...string) {
 }
 
 func (s *Solver) Solve1() {
-	fmt.Println("Solution 01:")
+	domain.RunFirstSolution()
 	s.solve(false)
 }
 
 func (s *Solver) Solve2() {
-	fmt.Println("Solution 02:")
+	domain.RunSecondSolution()
 	s.solve(true)
 }
 

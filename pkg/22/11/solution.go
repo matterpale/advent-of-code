@@ -40,12 +40,12 @@ func (s *Solver) Solve(args ...string) {
 }
 
 func (s *Solver) Solve1() {
-	fmt.Println("Solution 01:")
+	domain.RunFirstSolution()
 	s.solve(20, true)
 }
 
 func (s *Solver) Solve2() { // TODO: Fix the solver, somehow only works for 20 rounds :(
-	fmt.Println("Solution 02:")
+	domain.RunSecondSolution()
 	s.solve(10_000, false)
 }
 
