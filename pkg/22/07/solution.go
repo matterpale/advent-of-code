@@ -1,4 +1,4 @@
-package y22d7
+package y22d07
 
 import (
 	"bufio"

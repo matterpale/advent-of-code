@@ -18,7 +18,7 @@ func InputScannerGen(dir string) func() *bufio.Scanner {
 		readFile, _ := os.Open(fmt.Sprintf("%s/input", dir))
 		info, _ := readFile.Stat()
 		scanner := bufio.NewScanner(readFile)
-		scanner.Buffer(make([]byte, 0, info.Size()), 0)
+		scanner.Buffer(make([]byte, 0, info.Size()), int(info.Size())+1)
 		return scanner
 	}
 }

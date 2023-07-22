@@ -1,19 +1,41 @@
-package main
+package y15d01
 
 import (
 	"bufio"
 	"fmt"
-	"os"
+
+	"github.com/matterpale/advent-of-code/domain"
 )
 
-const input = "15/01/input"
+const dir = "pkg/15/01/"
 
-func main() {
-	fmt.Println(solve1(inputScanner().Text()))
-	fmt.Println(solve2(inputScanner().Text()))
+type Solver struct {
+	scannerGen func() *bufio.Scanner
 }
 
-func solve1(input string) int {
+func (s *Solver) Init() domain.Solver {
+	s.scannerGen = domain.InputScannerGen(dir)
+	return s
+}
+
+func (s *Solver) Solve(_ ...string) {
+	fmt.Println("Puzzle not abstracted for a general solution.")
+}
+
+func (s *Solver) Solve1() {
+	fmt.Println("Solution 01:")
+	s.solve1()
+}
+
+func (s *Solver) Solve2() {
+	fmt.Println("Solution 02:")
+	s.solve2()
+}
+
+func (s *Solver) solve1() {
+	scanner := s.scannerGen()
+	scanner.Scan()
+	input := scanner.Text()
 	var f int
 	for _, v := range input {
 		switch v {
@@ -25,10 +47,13 @@ func solve1(input string) int {
 			break
 		}
 	}
-	return f
+	fmt.Println(f)
 }
 
-func solve2(input string) int {
+func (s *Solver) solve2() {
+	scanner := s.scannerGen()
+	scanner.Scan()
+	input := scanner.Text()
 	var f, p int
 	for i, v := range input {
 		switch v {
@@ -44,13 +69,5 @@ func solve2(input string) int {
 			break
 		}
 	}
-	return p
-}
-
-func inputScanner() *bufio.Scanner {
-	readFile, _ := os.Open(input)
-	info, _ := readFile.Stat()
-	scanner := bufio.NewScanner(readFile)
-	scanner.Buffer(make([]byte, 0, info.Size()), 0)
-	return scanner
+	fmt.Println(p)
 }

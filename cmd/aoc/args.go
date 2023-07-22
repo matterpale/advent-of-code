@@ -13,7 +13,7 @@ func getPuzzleString(year, day string) (string, error) {
 		return "", errors.New("invalid year")
 	} else if y < 15 {
 		return "", fmt.Errorf("aoc dates back to only 2015 (year entered: %d)", y)
-	} else if y > time.Now().Year()-2000 || !currentAocYear(y) {
+	} else if y > time.Now().Year()-2000 || (y == time.Now().Year()-2000 && !currentAocYear(y)) {
 		return "", fmt.Errorf("have patience (year entered: %d)", y)
 	}
 
@@ -22,7 +22,7 @@ func getPuzzleString(year, day string) (string, error) {
 		return "", errors.New("invalid year")
 	} else if d < 1 || d > 25 {
 		return "", fmt.Errorf("advent calendar only spans 01-25 (day entered: %d)", d)
-	} else if !currentAocDay(y, d) {
+	} else if y == time.Now().Year()-2000 && !currentAocDay(y, d) {
 		return "", fmt.Errorf("have patience (year and day entered: %d %d)", y, d)
 	}
 

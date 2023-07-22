@@ -5,10 +5,9 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
-const input = "21/02/input"
+const input = "21/01/input"
 
 func inputScanner() *bufio.Scanner {
 	readFile, _ := os.Open(input)
@@ -24,50 +23,50 @@ func main() {
 }
 
 func solve1(scanner *bufio.Scanner) int {
-	var h, d int
+	var prev int
+	incs := -1
 	for scanner.Scan() {
 		txt := scanner.Text()
 		if txt == "" {
 			break
 		}
-		split := strings.Split(txt, " ")
-		n, err := strconv.Atoi(split[1])
+		n, err := strconv.Atoi(scanner.Text())
 		if err != nil {
 			panic("atoi")
 		}
-		switch split[0] {
-		case "forward":
-			h = h + n
-		case "down":
-			d = d + n
-		case "up":
-			d = d - n
+		if n > prev {
+			incs++
 		}
+		prev = n
 	}
-	return h * d
+	return incs
 }
 
 func solve2(scanner *bufio.Scanner) int {
-	var h, d, a int
+	win := [4]int{}
+	var i, j, incs int
 	for scanner.Scan() {
 		txt := scanner.Text()
 		if txt == "" {
 			break
 		}
-		split := strings.Split(txt, " ")
-		n, err := strconv.Atoi(split[1])
+		n, err := strconv.Atoi(scanner.Text())
 		if err != nil {
 			panic("atoi")
 		}
-		switch split[0] {
-		case "forward":
-			h = h + n
-			d = d + (a * n)
-		case "down":
-			a = a + n
-		case "up":
-			a = a - n
+		win[i] = n
+		if j > 2 {
+			old, nex := comp(win, i)
+			if old < nex {
+				incs++
+			}
 		}
+		i = (i + 1) % 4
+		j++
 	}
-	return h * d
+	return incs
+}
+
+func comp(win [4]int, i int) (int, int) {
+	return win[(i+1)%4] + win[(i+2)%4] + win[(i+3)%4], win[i] + win[(i+2)%4] + win[(i+3)%4]
 }

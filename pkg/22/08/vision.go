@@ -1,4 +1,4 @@
-package y22d8
+package y22d08
 
 func visibleFromOutside(grid [gridSize][gridSize]byte) (visibleGrid [gridSize][gridSize]bool) {
 	for i, row := range grid {
