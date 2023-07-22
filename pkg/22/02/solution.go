@@ -34,14 +34,14 @@ func (s *Solver) Solve(args ...string) {
 }
 
 func (s *Solver) Solve1() {
-	fmt.Printf("Solution 01:\n%d\n", s.solve(false))
+	domain.RunFirstSolution(func() { s.solve(false) })
 }
 
 func (s *Solver) Solve2() {
-	fmt.Printf("Solution 02:\n%d\n", s.solve(true))
+	domain.RunSecondSolution(func() { s.solve(true) })
 }
 
-func (s *Solver) solve(smartStrategy bool) int {
+func (s *Solver) solve(smartStrategy bool) {
 	var scoreSlice = [3][3]int{
 		{4, 8, 3},
 		{1, 5, 9},
@@ -62,7 +62,7 @@ func (s *Solver) solve(smartStrategy bool) int {
 			totalScore += scoreSlice[opp][me]
 		}
 	}
-	return totalScore
+	fmt.Println(totalScore)
 }
 
 func score1(opp, me string) (x, y int) {

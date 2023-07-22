@@ -25,13 +25,11 @@ func (s *Solver) Solve(_ ...string) {
 }
 
 func (s *Solver) Solve1() {
-	domain.RunFirstSolution()
-	s.solve1()
+	domain.RunFirstSolution(s.solve1)
 }
 
 func (s *Solver) Solve2() {
-	domain.RunSecondSolution()
-	s.solve2()
+	domain.RunSecondSolution(s.solve2)
 }
 
 func (s *Solver) solve1() {

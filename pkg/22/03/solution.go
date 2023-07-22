@@ -18,6 +18,14 @@ type Solver struct {
 	scanner func() *bufio.Scanner
 }
 
+func (s *Solver) Solve1() {
+	domain.RunFirstSolution(s.solve1)
+}
+
+func (s *Solver) Solve2() {
+	domain.RunSecondSolution(s.solve2)
+}
+
 func (s *Solver) Init() domain.Solver {
 	s.scanner = domain.InputScannerGen(dir)
 	return s
@@ -27,7 +35,7 @@ func (s *Solver) Solve(_ ...string) {
 	fmt.Println("Puzzle not abstracted for a general solution.")
 }
 
-func (s *Solver) Solve1() {
+func (s *Solver) solve1() {
 	var total int
 	scanner := s.scanner()
 	for scanner.Scan() {
@@ -43,10 +51,10 @@ func (s *Solver) Solve1() {
 			}
 		}
 	}
-	fmt.Printf("Solution 01:\n%d\n", total)
+	fmt.Println(total)
 }
 
-func (s *Solver) Solve2() {
+func (s *Solver) solve2() {
 	var total int
 	var triad [][]byte
 	scanner := s.scanner()
@@ -63,7 +71,7 @@ func (s *Solver) Solve2() {
 		}
 		triad = nil
 	}
-	fmt.Printf("Solution 02:\n%d\n", total)
+	fmt.Println(total)
 }
 
 func priority(b byte) int {

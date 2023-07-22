@@ -23,13 +23,11 @@ func (s *Solver) Solve(_ ...string) {
 }
 
 func (s *Solver) Solve1() {
-	domain.RunFirstSolution()
-	s.solve(false)
+	domain.RunFirstSolution(func() { s.solve(false) })
 }
 
 func (s *Solver) Solve2() {
-	domain.RunSecondSolution()
-	s.solve(true)
+	domain.RunSecondSolution(func() { s.solve(true) })
 }
 
 func (s *Solver) solve(_ bool) {

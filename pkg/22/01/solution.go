@@ -35,13 +35,11 @@ func (s *Solver) Solve(args ...string) {
 }
 
 func (s *Solver) Solve1() {
-	domain.RunFirstSolution()
-	s.solve(1)
+	domain.RunFirstSolution(func() { s.solve(1) })
 }
 
 func (s *Solver) Solve2() {
-	domain.RunSecondSolution()
-	s.solve(3)
+	domain.RunSecondSolution(func() { s.solve(3) })
 }
 
 func (s *Solver) solve(topLimit int) {

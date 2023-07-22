@@ -40,13 +40,11 @@ func (s *Solver) Solve(args ...string) {
 }
 
 func (s *Solver) Solve1() {
-	domain.RunFirstSolution()
-	s.solve(20, true)
+	domain.RunFirstSolution(func() { s.solve(20, true) })
 }
 
 func (s *Solver) Solve2() { // TODO: Fix the solver, somehow only works for 20 rounds :(
-	domain.RunSecondSolution()
-	s.solve(10_000, false)
+	domain.RunSecondSolution(func() { s.solve(10_000, false) })
 }
 
 func (s *Solver) solve(rounds int, relief bool) {
