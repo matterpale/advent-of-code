@@ -7,7 +7,7 @@ import (
 	"github.com/matterpale/advent-of-code/domain"
 )
 
-const dir = "pkg/{year}/{day}/" // TODO: Specify!
+const dir = "pkg/YY/DD/" // TODO: Specify!
 
 type Solver struct {
 	scanner func() *bufio.Scanner

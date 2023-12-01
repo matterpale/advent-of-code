@@ -1,2 +1,4 @@
+github.com/porfirion/trie v1.0.0 h1:uJ5eKB5XQgTc8IHauQF7NFDQtm/zMZ2K3RDQIJ5FByY=
+github.com/porfirion/trie v1.0.0/go.mod h1:Ru7z3d2h517lkrh8VdzjZazKfaxV4jf4gLi9myHMbe0=
 golang.org/x/exp v0.0.0-20221204150635-6dcec336b2bb h1:QIsP/NmClBICkqnJ4rSIhnrGiGR7Yv9ZORGGnmmLTPk=
 golang.org/x/exp v0.0.0-20221204150635-6dcec336b2bb/go.mod h1:CxIveKay+FTh1D0yPZemJVgC/95VzuuOLq5Qi4xnoYc=

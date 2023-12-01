@@ -18,6 +18,7 @@ import (
 	y22d11 "github.com/matterpale/advent-of-code/pkg/22/11"
 	y22d12 "github.com/matterpale/advent-of-code/pkg/22/12"
 	y22d13 "github.com/matterpale/advent-of-code/pkg/22/13"
+	y23d01 "github.com/matterpale/advent-of-code/pkg/23/01"
 )
 
 var Implemented = map[string]domain.Solver{
@@ -40,6 +41,8 @@ var Implemented = map[string]domain.Solver{
 	"y22d11": &y22d11.Solver{},
 	"y22d12": &y22d12.Solver{},
 	"y22d13": &y22d13.Solver{},
+	// 2023
+	"y23d01": &y23d01.Solver{},
 }
 
 func InitAllSolvers() map[string]domain.Solver {
