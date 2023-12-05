@@ -1,6 +1,6 @@
 module github.com/matterpale/advent-of-code
 
-go 1.19
+go 1.21
 
 require (
 	github.com/porfirion/trie v1.0.0

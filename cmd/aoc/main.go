@@ -7,7 +7,6 @@ import (
 	"sort"
 
 	"github.com/matterpale/advent-of-code/domain"
-	"github.com/matterpale/advent-of-code/internal/solvers"
 )
 
 // TODO: perhaps make it a CLI?
@@ -17,7 +16,7 @@ func main() {
 	argCount := len(args) - 1
 	switch argCount {
 	case 0:
-		allSolutions(solvers.InitAllSolvers())
+		allSolutions(initAllSolvers())
 		return
 	case 1:
 		log.Panicf("none or at least 2 args expected (year, day); got: %s", args[1])
@@ -39,7 +38,7 @@ func puzzleSolver(year, day string) domain.Solver {
 	if err != nil {
 		log.Panic(err.Error())
 	}
-	solver, ok := solvers.Implemented[puzzle]
+	solver, ok := implemented[puzzle]
 	if !ok {
 		log.Panicf("unimplemented solver: %s", puzzle)
 	}
